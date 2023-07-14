@@ -29,7 +29,7 @@ function ChiTiet ({}) {
                     "ID_DE_THI": "",
                     "ID_CAU_HOI": "",
                     "DAP_AN_USERS": "",
-                    "ID_HOC_PHAN": "",
+                    "TEN_HOC_PHAN": "",
                     "ID_MON_HOC": "",
                     "ID_MUC_DO": "",
                     "NOI_DUNG": "",
@@ -57,10 +57,12 @@ function ChiTiet ({}) {
 
     async function getThongTin (thongtin) {
         let result = await axios.post('http://localhost:8082/chi_tiet', thongtin);
-        setChiTietBaiLam(result);
+        if (result.ID_DE_THI) {
+            setChiTietBaiLam(result);
+        }
 
-        let anh = await axios.post('http://localhost:8082/getanh');
-        setAnh(anh[0].NOI_DUNG_ANH);
+        // let anh = await axios.post('http://localhost:8082/getanh');
+        // setAnh(anh[0].NOI_DUNG_ANH);
         // console.log(anh);
 
     }
@@ -86,10 +88,10 @@ function ChiTiet ({}) {
 
         <div className="d-flex align-items-center justify-content-between p-3 my-3 text-blue bg-purple rounded shadow-sm">
             <div className="lh-1">
-            <h4 className="h3 mb-0 text-black lh-1 text-success">Điểm: {chiTietBaiLam.DIEM}</h4>
+            <h4 className="h3 mb-0 text-black lh-1 text-success">Điểm: {parseFloat(chiTietBaiLam.DIEM).toFixed(2)}</h4>
             </div>
             <div className="lh-1">
-            <h4 className="h3 mb-0 text-black lh-1 text-success">Ngày làm bài: {chiTietBaiLam.NGAY_THI.substring(0,10)}</h4>
+            {chiTietBaiLam.NGAY_THI && <h4 className="h3 mb-0 text-black lh-1 text-success">Ngày làm bài: {chiTietBaiLam.NGAY_THI.substring(0,10)}</h4>}
             </div>
         </div>
 
@@ -189,7 +191,7 @@ function ChiTiet ({}) {
                                         <div style={{marginTop: "10px"}}>
                                             <h6>
                                                 <strong>
-                                                Lời giải:
+                                                Lời giải: {item.TEN_HOC_PHAN}
                                                 </strong>
                                                 {item.NOI_DUNG_DAP_AN && <Latex>{item.NOI_DUNG_DAP_AN}</Latex>}
                                             </h6>

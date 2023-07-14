@@ -31,7 +31,7 @@ function TestLayout (props) {
     const navigate = useNavigate();
 
     ///////Count down
-
+    const [thoiGianThi, setThoiGianThi] = useState(5400);
     const [countdown, setCountdown] = useState(5400);
     const timeId = useRef();
 
@@ -83,10 +83,10 @@ function TestLayout (props) {
 
         var result = {
             "id_user": `${localStorage.getItem("id")}`,
-            "id_de_thi": "DT_1", 
+            "id_de_thi": `${test}`, 
             "diem": `${diem}`, 
             "ngay_thi": `${today.toISOString()}`,
-            "thoi_gian": `${5400 - countdown}`, 
+            "thoi_gian": `${thoiGianThi - countdown}`, 
             "chi_tiet": ds_result
         }
 
@@ -156,19 +156,43 @@ function TestLayout (props) {
     const [cau_hoi, setCau_hoi] = useState(abc);
     const [currentQuestion, setCurrentQuestion] = useState(1);
     const [displayFlag, setDisplayFlag] = useState(true);
+    const [thongTinDeThi, setThongTinDeThi] = useState ({
+        "TEN_DE": "",
+        "ID_DE_THI": "",
+        "ID_MON_HOC": "",
+        "ID_HOC_PHAN": "",
+        "SO_NGUOI_THAM_GIA": "",
+        "DIEM_CAO_NHAT": "",
+        "DIEM_TB": "",
+        "THOI_GIAN": "",
+        "TYPE": "",
+        "SO_CAU": ""
+    })
     const total_question = question_list.length;
 
     async function getCauHoi (test) {
-        let text1 = "http://localhost:8082/de_thi?de_thi=DT_1";
-        list_cau_hoi = await axios.get(text1);
-        let list_cau = [];
-        for (let index in list_cau_hoi) {
-            list_cau_tra_loi.push({STT: index, attemped: false, marked: false, answer: 0});
-            list_cau.push(list_cau_hoi[index]);
+        let text2 = `http://localhost:8082/thong_tin_de?thong_tin_de=${test}`;
+        const de_thi = await axios.get(text2);
+        if (de_thi[0]) {
+            setThongTinDeThi(de_thi[0]);
+            const thoiGian = parseInt(de_thi[0].THOI_GIAN);
+            setCountdown(thoiGian*60);
+            setThoiGianThi(thoiGian*60)
         }
-        setQuestion_list(list_cau_tra_loi);
-        setCau_hoi(list_cau_hoi[currentQuestion-1]);
-        setList_hoi(list_cau);
+
+
+        let text1 = `http://localhost:8082/de_thi?de_thi=${test}`;
+        list_cau_hoi = await axios.get(text1);
+        if (list_cau_hoi[0]) {
+            let list_cau = [];
+            for (let index in list_cau_hoi) {
+                list_cau_tra_loi.push({STT: index, attemped: false, marked: false, answer: 0});
+                list_cau.push(list_cau_hoi[index]);
+            }
+            setQuestion_list(list_cau_tra_loi);
+            setCau_hoi(list_cau_hoi[currentQuestion-1]);
+            setList_hoi(list_cau);
+        }
     };
 
     
@@ -233,7 +257,7 @@ function TestLayout (props) {
                     <div className="content__inner">
                         <div className="test__title-block sidetest-title">
                             <span>
-                            THI THỬ THPT QUỐC GIA
+                            {thongTinDeThi.TEN_DE}
                             </span>
                         </div>
                         <div className="test__question">

@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styles from './Mon_hoc.module.scss';
 import classNames from 'classnames/bind';
 // import axios from 'axios';
@@ -22,6 +22,7 @@ function Items({ currentItems }) {
   }
 
 function Mon_hoc ({}) {
+    const navigate = useNavigate();
 
 
     const location = useLocation();
@@ -39,7 +40,7 @@ function Mon_hoc ({}) {
         {
             ID_HOC_PHAN: null,
             ID_MON_HOC: null,
-            TEN: null,
+            TEN_HOC_PHAN: null,
             SO_DE: null,
             MO_TA: null
         }
@@ -181,7 +182,7 @@ function Mon_hoc ({}) {
                                     return (
                                         <tr key={index}>
                                             <td>
-                                                {item.TEN}
+                                                {item.TEN_HOC_PHAN}
                                             </td> 
                                             <td >
                                                 <NavLink to={link_text}>Chi Tiêt</NavLink>
@@ -225,20 +226,23 @@ function Mon_hoc ({}) {
                                             <div className={cx('test__title')}>
                                                 {item.TEN_DE}
                                             </div>
-                                            <NavLink 
+                                            <button 
                                                 className={cx('test__btn')}
-                                                to={`/test?test=${item.ID_DE_THI}`}
                                                 style={{
                                                     display: 'flex',
                                                     justifyContent: 'center',
                                                     textDecoration: 'none'
                                                 }}
                                                 onClick={() => {
-                                                    alert('Thông báo', 'Xác nhận tham gia thi');
+                                                    // eslint-disable-next-line no-restricted-globals
+                                                    let cf = confirm('Xác nhận tham gia thi');
+                                                    if (cf) {
+                                                        navigate(`/test?test=${item.ID_DE_THI}`);
+                                                    }
                                                 }}
                                             >
                                                 Thi Thử
-                                            </NavLink>
+                                            </button>
                                         </div>
                                         <div className={cx('subject__full-detail')}>
                                             <div className={cx('test__socau')}>
@@ -248,7 +252,7 @@ function Mon_hoc ({}) {
                                             <i className="fa-solid fa-clock"/> {item.THOI_GIAN} Phút
                                             </div>
                                             <div className={cx('test__diemcaonha')}>
-                                            <i className="fa-solid fa-star"/> Điểm cao nhất: <span style={{color: 'rgba(60,141,188, 1)', fontWeight: '600'}}>{item.DIEM_CAO_NHAT}</span>
+                                            <i className="fa-solid fa-star"/> Điểm cao nhất: <span style={{color: 'rgba(60,141,188, 1)', fontWeight: '600'}}>{parseFloat(item.DIEM_CAO_NHAT).toFixed(2)}</span>
                                             </div>
                                         </div>
                                     </li>

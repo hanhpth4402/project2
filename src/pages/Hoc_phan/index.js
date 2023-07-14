@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate, useNavigation } from 'react-router-dom';
 import styles from './Hoc_phan.module.scss';
 import classNames from 'classnames/bind';
 // import axios from 'axios';
@@ -9,6 +9,7 @@ import ReactPaginate from 'react-paginate';
 const cx = classNames.bind(styles);
 
 const formatTime = (second) => {
+
     let hours = Math.floor(second / 3600);
     let minutes = Math.floor((second - hours*3600) / 60);
     let seconds = Math.floor (second - hours*3600 - minutes*60);
@@ -21,16 +22,18 @@ const formatTime = (second) => {
 }
 
 function Hoc_phan () {
+    const navigator = useNavigate();
+
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     var hoc_phan = searchParams.get('hoc_phan');
 
     const [hp, setHp] = useState({
-        ID_HOC_PHAN: null,
-        ID_MON_HOC: null,
-        TEN: null,
-        SO_DE: null,
-        MO_TA: null
+        ID_HOC_PHAN: "",
+        ID_MON_HOC: "",
+        TEN: "",
+        SO_DE: "",
+        MO_TA: ""
     });
 
     const [deThi, setDeThi] = useState([
@@ -49,7 +52,9 @@ function Hoc_phan () {
     async function getThongTinHocPhan (hoc_phan) {
         let text1 = `http://localhost:8082/hoc_phan?hoc_phan=${hoc_phan}`;
         let tmp = await axios.get(text1);
-        setHp(tmp[0]);
+        if (tmp[0]) {
+            setHp(tmp[0])
+        }
     }
 
     async function getDeThiTheoHocPhan (hoc_phan) {
@@ -95,9 +100,22 @@ function Hoc_phan () {
                                     <span className="d-block">{deThi[index].TYPE === 1 ? "Đề đầy đủ": "Đề rút gọn"}</span>
                                 </div>
                                 <div>
-                                    <div> <strong>Thời gian làm: {formatTime(parseInt(deThi[index].THOI_GIAN))}</strong> </div>
+                                    <div> <strong>Thời gian làm: {formatTime(parseInt(deThi[index].THOI_GIAN)*60)}</strong> </div>
                                 </div>
-                                <NavLink href="#">Chi tiết</NavLink>
+                                <button 
+                                class="btn btn-primary"
+                                style={{
+                                    cursor: 'pointer'
+                                }}
+                                onClick={() => {
+                                    // eslint-disable-next-line no-restricted-globals
+                                    let cf = confirm("Đồng ý tham gia thi");
+
+                                    if (cf) {
+                                        navigator(`/test?test=${item.ID_DE_THI}`);
+                                    }
+
+                                }}>Tham gia thi</button>
                             </div>
                         </div>
                     </div>
