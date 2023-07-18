@@ -6,100 +6,17 @@ function Home () {
     
     return (
         <>
-<main class="container py-5">
-  <h1>Bootstrap and Masonry</h1>
-  <p class="lead">Integrate <a href="https://masonry.desandro.com/">Masonry</a> with the Bootstrap grid system and  s component.</p>
+<main class="container py-5" style={{height: '100vh'}}>
+  <h1>Thi thử THPT Quốc Gia</h1>
+  <p>Thi Thử Online được thành lập để tạo ra một Thư Viện các Đề Thi Trung Học Phổ Thông (THPT) Quốc Gia. Các đề thi được tổng hợp và chọn lọc từ các đề thi chính thức, tham khảo của Bộ Giáo Dục, các Sở Giáo Dục và các Trường Chuyên trong cả nước. Hy vọng Thi Thử Online sẽ là nguồn tài liệu tham khảo hữu ích cho các bạn học sinh (và giáo viên) để chuẩn bị tốt nhất cho kỳ thi đại học hay thi THPT Quốc gia. Hãy đăng ký thành viên và bắt đầu Thi Thử Online hoàn toàn miễn phí. Bài làm sẽ được chấm điểm ngay sau khi Nộp bài và được lưu lại trong phần Bảng Điểm của từng thành viên để cho các bạn tiện theo dõi.
 
-  <p>Masonry is not included in Bootstrap. Add it by including the JavaScript plugin manually, or using a CDN like so:</p>
+Nếu các bạn thấy trang Thi Thử Online hữu ích, các bạn hãy chia sẻ để cho nhiều người cùng sử dụng (khi đó các bạn sẽ được thi thử miễn phí không bị giới hạn bởi số đề thi). Và khi có nhiều người cùng sử dụng trang Thi Thử Online, chúng tôi sẽ cập nhật càng nhiều đề thi, đáp án và nhiều tính năng khác nữa.
 
-  <pre><code>
-&lt;script src=&quot;https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js&quot; integrity=&quot;sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D&quot; crossorigin=&quot;anonymous&quot; async&gt;&lt;/script&gt;
-  </code></pre>
+</p>
 
   {/* <p>By adding <code>data-masonry='{"percentPosition": true }'</code> to the <code>.row</code> wrapper, we can combine the powers of Bootstrap's responsive grid and Masonry's positioning.</p> */}
 
   <hr class="my-5"/>
-
-  <div class="row" data-masonry='{"percentPosition": true }'>
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class=" ">
-        <svg class="bd-placeholder-img  -img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
-        <div class=" -body">
-          <h5 class=" -title">  title that wraps to a new line</h5>
-          <p class=" -text">This is a longer   with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="  p-3">
-        <figure class="p-3 mb-0">
-          <blockquote class="blockquote">
-            <p>A well-known quote, contained in a blockquote element.</p>
-          </blockquote>
-          <figcaption class="blockquote-footer mb-0 text-body-secondary">
-            Someone famous in <cite title="Source Title">Source Title</cite>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class=" ">
-        <svg class="bd-placeholder-img  -img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
-        <div class=" -body">
-          <h5 class=" -title">  title</h5>
-          <p class=" -text">This   has supporting text below as a natural lead-in to additional content.</p>
-          <p class=" -text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="  text-bg-primary text-center p-3">
-        <figure class="mb-0">
-          <blockquote class="blockquote">
-            <p>A well-known quote, contained in a blockquote element.</p>
-          </blockquote>
-          <figcaption class="blockquote-footer mb-0 text-white">
-            Someone famous in <cite title="Source Title">Source Title</cite>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="  text-center">
-        <div class=" -body">
-          <h5 class=" -title">  title</h5>
-          <p class=" -text">This   has a regular title and short paragraph of text below it.</p>
-          <p class=" -text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class=" ">
-        <svg class="bd-placeholder-img  -img" width="100%" height="260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder:   image" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">  image</text></svg>
-      </div>
-    </div>
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="  p-3 text-end">
-        <figure class="mb-0">
-          <blockquote class="blockquote">
-            <p>A well-known quote, contained in a blockquote element.</p>
-          </blockquote>
-          <figcaption class="blockquote-footer mb-0 text-body-secondary">
-            Someone famous in <cite title="Source Title">Source Title</cite>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class=" ">
-        <div class=" -body">
-          <h5 class=" -title">  title</h5>
-          <p class=" -text">This is another   with title and supporting text below. This   has some additional content to make it slightly taller overall.</p>
-          <p class=" -text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-    </div>
-  </div>
 
 </main>
 

@@ -13,9 +13,9 @@ function Feedback () {
 								<div class="contact-wrap w-100 p-md-5 p-4">
 									<h3 class="mb-4">Get in touch</h3>
 									<div id="form-message-warning" class="mb-4"></div> 
-				      		<div id="form-message-success" class="mb-4">
-				            Your message was sent, thank you!
-				      		</div>
+									<div id="form-message-success" class="mb-4">
+									Your message was sent, thank you!
+									</div>
 									<form method="POST" id="contactForm" name="contactForm">
 										<div class="row">
 											<div class="col-md-6">
@@ -48,8 +48,8 @@ function Feedback () {
 									</form>
 								</div>
 							</div>
-							<div class="col-md-5 d-flex align-items-stretch">
-								<div class="info-wrap bg-primary-custom w-100 p-lg-5 p-4">
+					<div class="col-md-5 d-flex align-items-stretch">
+						<div class="info-wrap bg-primary-custom w-100 p-lg-5 p-4">
 									<h3 class="mb-4 mt-md-4">Contact us</h3>
 				        	<div class="dbox w-100 d-flex align-items-start">
 				        		<div class="icon d-flex align-items-center justify-content-center">
@@ -75,7 +75,7 @@ function Feedback () {
 					            <p><span>Email:</span> <a href="mailto:info@yoursite.com">hanh.pth204546@sis.hust.edu.vn</a></p>
 					          </div>
 				          </div>
-			          </div>
+						</div>
 							</div>
 						</div>
 					</div>
