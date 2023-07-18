@@ -25,7 +25,43 @@ function ChiTiet ({}) {
             "TYPE": "",
             "CHI_TIET_CAU_TRA_LOI": [
                 {
+                    "STT": "",
                     "ID_USERS": "",
+                    "ID_DE_THI": "",
+                    "ID_CAU_HOI": "",
+                    "DAP_AN_USERS": "",
+                    "TEN_HOC_PHAN": "",
+                    "ID_MON_HOC": "",
+                    "ID_MUC_DO": "",
+                    "NOI_DUNG": "",
+                    "NOI_DUNG_ANH": "",
+                    "DAP_AN_A": "",
+                    "DAP_AN_A_ANH": "",
+                    "DAP_AN_B": "",
+                    "DAP_AN_B_ANH": "",
+                    "DAP_AN_C": "",
+                    "DAP_AN_C_ANH": "",
+                    "DAP_AN_D": "",
+                    "DAP_AN_D_ANH": "",
+                    "DAP_AN": "",
+                    "NOI_DUNG_DAP_AN": ""
+                }
+            ]
+        }
+    );
+    const [chiTietSearch, setChiTietSearch] = useState (
+        {
+            "ID_DE_THI": "",
+            "DIEM": "",
+            "NGAY_THI": "",
+            "THOI_GIAN": "",
+            "TEN_DE": "",
+            "ID_HOC_PHAN": "",
+            "TYPE": "",
+            "CHI_TIET_CAU_TRA_LOI": [
+                {
+                    "ID_USERS": "",
+                    "STT": "",
                     "ID_DE_THI": "",
                     "ID_CAU_HOI": "",
                     "DAP_AN_USERS": "",
@@ -54,11 +90,48 @@ function ChiTiet ({}) {
         "id_de_thi": id_de_thi
     };
     const [anh, setAnh] = useState(null);
+    const [searchValue, setSearchValue] = useState(0);
+
+    function handelSearch (search) {
+        if (search === '0') {
+            setChiTietBaiLam(chiTietSearch)
+        }else {
+            if (search === 'câu đúng') {
+                let newList = [...chiTietSearch.CHI_TIET_CAU_TRA_LOI];
+                let newArray = newList.filter((item) => {
+                    return item.DAP_AN === item.DAP_AN_USERS;
+                });
+                // console.log(newArray);
+                setChiTietBaiLam({...chiTietSearch, CHI_TIET_CAU_TRA_LOI: newArray});
+            }
+            if (search === 'câu sai') {
+                let newList = [...chiTietSearch.CHI_TIET_CAU_TRA_LOI];
+                let newArray = newList.filter((item) => {
+                    return item.DAP_AN !== item.DAP_AN_USERS;
+                });
+                // console.log(newArray);
+                setChiTietBaiLam({...chiTietSearch, CHI_TIET_CAU_TRA_LOI: newArray});
+            }
+            if (search !== 'câu đúng' && search !== 'câu sai' && search !== '0') {
+                let newList = [...chiTietSearch.CHI_TIET_CAU_TRA_LOI];
+                let newArray = newList.filter((item) => {
+                    return item.ID_MUC_DO === parseInt(search);
+                });
+                // console.log(newArray);
+                setChiTietBaiLam({...chiTietSearch, CHI_TIET_CAU_TRA_LOI: newArray});
+            }
+        }
+    }
 
     async function getThongTin (thongtin) {
         let result = await axios.post('http://localhost:8082/chi_tiet', thongtin);
         if (result.ID_DE_THI) {
+            result.CHI_TIET_CAU_TRA_LOI.map((item, index) => {
+                item.STT = index+1;
+                return true;
+            })
             setChiTietBaiLam(result);
+            setChiTietSearch(result);
         }
 
         // let anh = await axios.post('http://localhost:8082/getanh');
@@ -74,6 +147,7 @@ function ChiTiet ({}) {
     
     return (
         <>
+        
 <main className="container" style={{userSelect: "none"}}>
         <div className="d-flex align-items-center justify-content-between p-3 my-3 text-blue bg-purple rounded shadow-sm">
             <div className="lh-1">
@@ -82,7 +156,17 @@ function ChiTiet ({}) {
             </div>
 
             <form className="d-flex" style={{width: "500px"}} role="search">
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+            <select class="form-select" aria-label="Default select example" placeholder='Chọn câu muốn lọc' onChange={(event) => {
+                handelSearch(event.target.value);
+            }}>
+                <option value={0}>Chọn câu muốn lọc</option>
+                <option value={'câu đúng'}>Câu đúng</option>
+                <option value={'câu sai'}>Câu sai</option>
+                <option value={1}>Nhận biết</option>
+                <option value={2}>Thông hiểu</option>
+                <option value={3}>Vận dụng</option>
+                <option value={4}>Vận dụng cao</option>
+            </select>            
             </form>
         </div>
 
@@ -156,7 +240,7 @@ function ChiTiet ({}) {
                                         <strong className="text-gray-dark">
                                             <h4 className={classNames({
                                                 
-                                            })}>Câu. {index + 1} ({dung === 1 ? "Đúng" : (dung === 2) ? "Bỏ trống": "Sai"})</h4>
+                                            })}>Câu. {item.STT} ({dung === 1 ? "Đúng" : (dung === 2) ? "Bỏ trống": "Sai"})</h4>
                                             <div>
                                                 <Latex>{item.NOI_DUNG}</Latex>
                                                 <div>

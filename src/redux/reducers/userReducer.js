@@ -66,6 +66,27 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 isError: false
             }
 
+        case FETCH_USER_REGISTER: 
+            return {
+                ...state,
+                isLoading: true,
+                isError: false
+            }
+        
+        case FETCH_USER_REGISTER_ERROR: 
+            return {
+                ...state,
+                isLoading: false,
+                isError: true
+            }
+
+        case FETCH_USER_REGISTER_SUCCESS: 
+            return {
+                ...state,
+                isLoading: false,
+                isError: false
+            }
+
         case USER_REFRESH:
             return {
                 ...state,

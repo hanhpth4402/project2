@@ -31,7 +31,7 @@ function Hoc_phan () {
     const [hp, setHp] = useState({
         ID_HOC_PHAN: "",
         ID_MON_HOC: "",
-        TEN: "",
+        TEN_HOC_PHAN: "",
         SO_DE: "",
         MO_TA: ""
     });
@@ -74,10 +74,10 @@ function Hoc_phan () {
     }
 
     return (
-<main className="container">
-        <div className="d-flex align-items-center justify-content-between p-3 my-3 text-blue bg-purple rounded shadow-sm">
+    <main className="container">
+        <div className="d-flex align-items-center justify-content-between p-3 my-3 text-blue bg-white rounded shadow-sm abc">
             <div className="lh-1">
-            <h1 className="h3 mb-0 text-black lh-1">{hp.TEN}</h1>
+            <h1 className="h3 mb-0 text-black lh-1">{hp.TEN_HOC_PHAN}</h1>
             <small>{hp.MO_TA}</small>
             </div>
 

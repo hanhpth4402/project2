@@ -56,7 +56,7 @@ function Login () {
     return (
         <>
             <div className='login-block'>
-                <div className='login-container'>
+                <div className='login-container rounded-0 shadow'>
                     <div className='login-title'>
                         <span>
                             ĐĂNG NHẬP

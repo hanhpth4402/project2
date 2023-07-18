@@ -58,25 +58,25 @@ function Register () {
     }
 
     const handelOnChangePassword2 = (event) => {
-        if (event.target.value === "" && !warningPassword2) {
+        if ((event.target.value !== password) && !warningPassword2) {
             setWarningPassword2(true);
         }
 
-        if (event.target.value !== "" && warningPassword2) {
+        if ((event.target.value === password) && warningPassword2) {
             setWarningPassword2(false);
         }
         
         setPassword2(event.target.value)
     }
 
-    const handelLogin = () => {
+    const handelRegister = () => {
         if (!warningEmail && email === "") setWarningEmail(true);
         if (!warningPassword2 && password2 === "") setWarningPassword2(true);
         if (!warningPassword && password === "") setWarningPassword(true);
         if (!warningName && name === "") setWarningName(true);
 
-        if (email === "" || password === "") {
-
+        if (warningEmail || warningName || warningPassword || warningPassword2) {
+            console.log ('hfjdkaf');
         }
 
         else {
@@ -87,7 +87,7 @@ function Register () {
     return (
         <>
             <div className={cx('register--login-block')}>
-                <div className={cx('register--login-container')}>
+                <div className={cx('register--login-container', "rounded-0 shadow")}>
                     <div className={cx('register--login-title')}>
                         <span>
                             ĐĂNG KÝ
@@ -182,7 +182,7 @@ function Register () {
                                         </span>
                                     </div>
                                     <div className={cx('register--form__item-warning', 'warning-pass')} style={{opacity: `${warningPassword2 ? 1: 0}`}}>
-                                        *Không được bỏ trống
+                                        *Nhắc lại chính xác mật khẩu
                                     </div>
                                 </div>
 
@@ -193,7 +193,7 @@ function Register () {
                                         </span>
                                         <span 
                                             className={cx('register--form__btn-item', 'btn-title-login')}
-                                            onClick={() => handelLogin()}
+                                            onClick={() => handelRegister()}
                                         >
                                             Đăng Ký
                                         </span>
@@ -203,7 +203,7 @@ function Register () {
                         </div>
                         <div className={cx('register--login-social')}>
                             <div className={cx('register--login-social_item')}>
-                                Hoặc Đăng Nhập Bằng
+                                Hoặc Đăng Ký Bằng
                             </div>
                             <div className={cx('register--social_item', 'register--social-facebook')}>
                                 <i className={cx('register--social_item-icon') + ' fa-brands fa-facebook-f'}/>
