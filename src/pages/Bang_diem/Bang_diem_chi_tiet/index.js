@@ -112,7 +112,14 @@ function ChiTiet ({}) {
                 // console.log(newArray);
                 setChiTietBaiLam({...chiTietSearch, CHI_TIET_CAU_TRA_LOI: newArray});
             }
-            if (search !== 'câu đúng' && search !== 'câu sai' && search !== '0') {
+            if (search === 'câu bỏ trống') {
+                let newList = [...chiTietSearch.CHI_TIET_CAU_TRA_LOI];
+                let newArray = newList.filter((item) => {
+                    return item.DAP_AN_USERS === 0;
+                });
+                setChiTietBaiLam({...chiTietSearch, CHI_TIET_CAU_TRA_LOI: newArray});
+            }
+            if (search !== 'câu đúng' && search !== 'câu sai' && search !== '0' && search !== 'câu bỏ trống') {
                 let newList = [...chiTietSearch.CHI_TIET_CAU_TRA_LOI];
                 let newArray = newList.filter((item) => {
                     return item.ID_MUC_DO === parseInt(search);
@@ -162,6 +169,7 @@ function ChiTiet ({}) {
                 <option value={0}>Chọn câu muốn lọc</option>
                 <option value={'câu đúng'}>Câu đúng</option>
                 <option value={'câu sai'}>Câu sai</option>
+                <option value={'câu bỏ trống'}>Câu bỏ trống</option>
                 <option value={1}>Nhận biết</option>
                 <option value={2}>Thông hiểu</option>
                 <option value={3}>Vận dụng</option>
@@ -180,7 +188,7 @@ function ChiTiet ({}) {
         </div>
 
         <div className="my-3 p-3 bg-body rounded shadow-sm">
-            <h6 className="border-bottom pb-2 mb-0"><strong>Danh sách đề thi rút gọn</strong></h6>
+            <h6 className="border-bottom pb-2 mb-0"><strong>Đáp án chi tiết</strong></h6>
                 {chiTietBaiLam.CHI_TIET_CAU_TRA_LOI.map(
                     (item, index) => {
                         let nd_anh = ""
@@ -281,7 +289,7 @@ function ChiTiet ({}) {
                                             </h6>
                                         </div>
                                     </div>
-                                    <h6 style={{color: dung?"green":"red"}}>{dung ? "0.2/0.2": "0/0.2"}</h6>
+                                    <h6 style={{color: dung===1?"green":"red"}}>{dung === 1 ? "0.2/0.2" : "0/0.2"}</h6>
                                 </div>
                             </div>
                         </div>
