@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import styles from './AdminRegister.module.scss';
 import classNames from 'classnames/bind';
+import axios from 'axios';
 
 var cx = classNames.bind(styles);
 
@@ -75,13 +76,11 @@ function AdminRegister () {
         if (!warningPassword && password === "") setWarningPassword(true);
         if (!warningName && name === "") setWarningName(true);
 
-        if (email !== "" || password === "") {
+        if (email !== "" && password === "" ) {
             
         }
 
-        else {
-
-        }
+        
     }
 
     return (
