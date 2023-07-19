@@ -1,12 +1,12 @@
+
 import { useState } from 'react'
 import './Login.scss'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { handelLoginHandmade, handleLogin } from '../../redux/actions/userAction';
 import { ToastContainer } from 'react-toastify';
+import { handleLoginAdmin } from '../../../redux/actions/adminAction';
 
-function Login() {
-
+function AdminLogin() {
     const [showPassword, setShowPassword] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -46,16 +46,16 @@ function Login() {
         if (!warningEmail && email === "") setWarningEmail(true);
         if (!warningPassword && password === "") setWarningPassword(true);
         if (email !== "" || password !== "") {
-            dispatch(handelLoginHandmade(email, password));
+            dispatch(handleLoginAdmin(email, password));
         };
-        navigation('/');
+        navigation('/admin');
     }
 
-    const handleLoginAdmin = async () => {
-        navigation('/admin/login')
+    const handleLoginUser = async () => {
+        navigation('/login')
     }
 
-    var data = useSelector(state => state.user);
+    var data = useSelector(state => state.admin);
 
     return (
         <>
@@ -102,7 +102,7 @@ function Login() {
                                             />
                                             <span className='form__item-inpur-eye'>
                                                 <i
-                                                    class={`form__item-input-password-eyesicon ${showPassword === false ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'}`}
+                                                    className={`form__item-input-password-eyesicon ${showPassword === false ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'}`}
                                                     onClick={() => {
                                                         setShowPassword(!showPassword);
                                                     }}
@@ -160,9 +160,9 @@ function Login() {
                             <button
                                 type='button'
                                 className='btn btn-primary'
-                                onClick={() => handleLoginAdmin()}
+                                onClick={() => handleLoginUser()}
                             >
-                                Admin
+                                User
                             </button>
                             
                             <div className='social_item social-facebook'>
@@ -200,4 +200,4 @@ function Login() {
     )
 }
 
-export default Login
+export default AdminLogin;

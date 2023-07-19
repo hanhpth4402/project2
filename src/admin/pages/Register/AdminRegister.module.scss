@@ -1,0 +1,270 @@
+:root {
+    --register-border-color: rgba(181, 181, 181, 0.532);
+    --register-font-color: #333333;
+    --register-primary-color: 34,45,50;
+    --register-main-color: 60,141,188;
+
+}
+
+*{
+    box-sizing: border-box;
+}
+
+.register--login-block{
+    display: flex;
+}
+
+.register--login-container{
+    margin: auto;
+    margin-top: 20px;
+    width: 800px;
+    height: 400px;
+    border: 1px solid var(--register-border-color);
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    // justify-content: space-between;
+    .register--login-title {
+        background-color: rgba(247,247,247,1);
+        height: 40px;
+        border-bottom: 1px solid var(--register-border-color);
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        user-select: none;
+        span {
+            margin-left: 50px;
+            color: var(--register-font-color);
+        }
+    }
+    .register--login-inner{
+        user-select: none;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        align-self: center;
+        width: 700px;
+        .register--login-form{
+            border-bottom: 1px solid var(--register-border-color);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            .register--form__inner {
+                margin: auto;
+                width: 70%;
+                height: 90%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: end;
+                .register--form__item_input {
+                    display: flex;
+                    flex-direction: column;
+                    // justify-content: end;
+                    // justify-content: end;
+                    align-items: end;
+                    .register--form__item-input {
+                        width: 330px;
+                        height: 35px;
+                        border: 1px solid var(--register-border-color);
+                        margin-left: 15px;
+                    }
+
+                    .register--form__item-password {
+                        width: 330px;
+                        height: 35px;
+                        margin-left: 15px;
+                        position: relative;
+                        z-index: 1;
+                    }
+                    
+                    .register--form__item-inpur-eye {
+                        position: absolute;
+                        height: 35px;
+                        margin: 0 10px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-self: flex-end;
+                        color: rgba(var(--register-primary-color), 0.5);
+                        cursor: pointer;
+                        z-index: 2;
+                    }
+
+                    .register--form__item-inpur-eye:hover {
+                        color: rgba(var(--register-primary-color), 1);
+                    }
+
+                    .register--form__item-input:focus {
+                        width: 330px   ;
+                        height: 35px;
+                        outline: 1px solid rgba(var(--register-main-color), 1);
+                    }
+                    .register--form__item-title {
+                        font-weight: 500;
+                    }
+    
+                    .register--form__item-warning {
+                        font-size: 0.7rem;
+                        line-height: 1rem;
+                        height: 1rem;
+                        color: red;
+                    }
+
+                    .register--form__warning {
+                        outline: 1px solid red;
+                    }
+                    .register--form__warning:focus {
+                        outline: 1px solid red;
+                    }
+                    .register--for__item-main {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                    }
+                    .register--input_password {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: end;
+                    }
+                }
+
+            
+            .register--form__item {
+                display: flex;
+                flex-direction: row;
+            }
+            .register--form__checkbox {
+                align-self: center;
+                input {
+                    margin: 0 10px;
+                }
+            }
+
+            .register--form__btn {
+                font-size: 0.9rem;
+                display: flex;
+                flex-direction: row;
+                cursor: pointer;
+                // .register--form__item-forget {
+                //     width: 120px;
+                // }
+
+                div {
+                    margin-left: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: end;
+                }
+
+                .register--form__item-btn {
+                    width: 100px;
+                    height: 35px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    .register--btn-icon{
+                        margin-right: 5px;
+                    }
+                }
+
+                .register--btn-login {
+                    background-color: #008E4C;
+                    color: white;
+                    border-radius: 3px;
+                    cursor: pointer;
+                    user-select: none;
+                }
+
+                .register--btn-login:hover {
+                    background-color: #00773f;
+                    color: white;
+                    border-radius: 3px;
+                }
+
+                .register--btn-title-register {
+                    text-decoration: none;
+                    color: black;
+                }
+
+                .register--btn-register:hover {
+                    background-color: rgba(var(--register-main-color), 1);
+                    color: white;
+                    border-radius: 3px;
+                    .register--btn-title-register {
+                        color: white;
+                    }
+                }
+
+                .register--form__item-btn:hover {
+                    border: 1px solid var(--register-border-color);
+                    border-radius: 3px;
+                }
+                
+            }
+
+            .register--form__link-item {
+                text-decoration: none;
+                cursor: pointer;
+                color: rgba(var(--register-main-color), 1);
+            }
+
+            .register--form__link-item:hover {
+                color: rgba(var(--register-primary-color), 1);
+            }
+                
+            }
+        }
+    }
+    .register--login-social {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        height: 90px;
+        align-items: center;
+        // cursor: pointer;
+        user-select: none;
+        .register--social_item {
+            color: white;
+            height: 35px;
+            width: 175px;
+            background-color: #00d672;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            border: 1px solid black;
+            border-radius: 5px;
+            
+            .register--social_item-icon {
+                width: 30px;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-right: 1px solid black;
+            }
+            .register--social_item-name {
+                margin-left: 10px;
+            }
+            
+            
+        }
+        .register--social-facebook {
+            background-color: #2D4373;
+        }
+        .register--social-google {
+            background-color: #C23321;
+        }
+        .register--social-google:hover, .register--social-facebook:hover {      
+            opacity: 0.7;
+            cursor: pointer;
+        }
+    }
+}
