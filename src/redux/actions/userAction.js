@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import { loginApi, loginHandmade, user } from '../../server/UserService'
+import { loginApi, loginHandmade, registerHandmade, user } from '../../server/UserService'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -53,6 +53,20 @@ export const handelLoginHandmade = (email, password) => {
     }
 }
 
+export const handleRegister = ({username, email, password}) => {
+    return async (dispatch, getState) => {
+        dispatch ({type: FETCH_USER_REGISTER});
+        let respond = await registerHandmade ({username, email, password});
+
+        if (respond && respond.type === "success") {
+            dispatch({type: FETCH_USER_REGISTER_SUCCESS})
+        } else {
+            console.log(respond.message);
+            dispatch({type: FETCH_USER_LOGIN_ERROR})
+        }
+    }
+}
+
 
 export const handleLogin = (email, password) => {
     return async (dispatch, getState) => {
@@ -94,12 +108,6 @@ export const handleLogout = () => {
         dispatch({
             type: USER_LOGOUT
         })
-    }
-}
-
-export const handleRegister = (email, password) => {
-    return async (dispatch, getState) => {
-    
     }
 }
 

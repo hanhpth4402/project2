@@ -12,6 +12,7 @@
 
 .login-block{
     display: flex;
+    min-height: 100vh;
 }
 
 .login-container{
@@ -24,6 +25,8 @@
     display: flex;
     flex-direction: column;
     font-weight: 500;
+    background-color: white;
+
     // justify-content: space-between;
     .login-title {
         background-color: rgba(247,247,247,1);

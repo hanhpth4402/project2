@@ -60,11 +60,18 @@ function Bang_diem () {
 
     return (
         <>
+<div class="container rounded shadow bg-white">
+    <div class="row">
+        <div class="border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"/><span class="font-weight-bold">{localStorage.getItem("username")}</span><span class="text-black-50">{localStorage.getItem("email")}</span><span> </span></div>
+        </div>
+    </div>
+</div>
     <main className="container">
-            <div className="d-flex align-items-center justify-content-between p-3 my-3 text-blue bg-purple rounded shadow-sm">
-                <div className="lh-1">
-                <h1 className="h3 mb-0 text-black lh-1">Bảng điểm của {localStorage.getItem("username")}</h1>
-                <small>Since 2011</small>
+            <div className="d-flex align-items-center justify-content-between p-3 my-3 text-blue bg-purple rounded shadow-sm  bg-white">
+                <div className="lh-1 ">
+                <h1 className="h3 mb-0 text-black lh-1">Bảng điểm </h1>
+                <small>Since 2023</small>
                 </div>
 
                 <form className="d-flex" role="search">

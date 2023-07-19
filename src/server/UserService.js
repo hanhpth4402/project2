@@ -29,8 +29,14 @@ const loginHandmade = (email, password) => {
     return axios.post('http://localhost:8082/login', {email, password});
 }
 
+
 const adminLogin = (email, password) => {
     return axios.post('http://localhost:8082/admin/login', {email, password});
 }
 
-export {fetchAllUser, postCreateUser, putEditUser, deleteUser, loginApi, user, loginHandmade, adminLogin};
+
+const registerHandmade = ({username, email, password}) => {
+
+}
+
+export {fetchAllUser, postCreateUser, putEditUser, deleteUser, loginApi, user, loginHandmade, registerHandmade, adminLogin};

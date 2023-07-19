@@ -305,8 +305,11 @@
 
 .context-default {
     margin-top: 50px;
+    // padding-top: 50px;
     margin-left: 64px;
-    transition: margin-left 0.5s ease
+    transition: margin-left 0.5s ease;
+    background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+    min-height: fit-content;
 }
 
 .context-after {

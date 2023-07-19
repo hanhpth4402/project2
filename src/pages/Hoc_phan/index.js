@@ -31,7 +31,7 @@ function Hoc_phan() {
     const [hp, setHp] = useState({
         ID_HOC_PHAN: "",
         ID_MON_HOC: "",
-        TEN: "",
+        TEN_HOC_PHAN: "",
         SO_DE: "",
         MO_TA: ""
     });
@@ -74,57 +74,65 @@ function Hoc_phan() {
     }
 
     return (
+        // <<<<<<< HEAD
+        //         <main className="container">
+        //             <div className="d-flex align-items-center justify-content-between p-3 my-3 text-blue bg-purple rounded shadow-sm">
+        //                 <div className="lh-1">
+        //                     <h1 className="h3 mb-0 text-black lh-1">{hp.TEN}</h1>
+        //                     <small>{hp.MO_TA}</small>
+        //                 </div>
+
+        //                 <form className="d-flex" style={{ width: "500px" }} role="search">
+        //                     <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        //                 </form>
+        // =======
         <main className="container">
-            <div className="d-flex align-items-center justify-content-between p-3 my-3 text-blue bg-purple rounded shadow-sm">
+            <div className="d-flex align-items-center justify-content-between p-3 my-3 text-blue bg-white rounded shadow-sm abc">
                 <div className="lh-1">
-                    <h1 className="h3 mb-0 text-black lh-1">{hp.TEN}</h1>
+                    <h1 className="h3 mb-0 text-black lh-1">{hp.TEN_HOC_PHAN}</h1>
                     <small>{hp.MO_TA}</small>
                 </div>
 
-                <form className="d-flex" style={{ width: "500px" }} role="search">
-                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                </form>
-            </div>
+                <div className="my-3 p-3 bg-body rounded shadow-sm">
+                    <h6 className="border-bottom pb-2 mb-0"><strong>Danh sách đề thi rút gọn</strong></h6>
+                    {deThi.map((item, index) => (
+                        <div className="d-flex text-muted pt-3"
+                            key={index}
+                        >
+                            <svg className="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff" /><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                            <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
+                                <div className="d-flex justify-content-between">
+                                    <div>
+                                        <strong className="text-gray-dark">{deThi[index].TEN_DE}</strong>
+                                        <span className="d-block">{deThi[index].TYPE === 1 ? "Đề đầy đủ" : "Đề rút gọn"}</span>
+                                    </div>
+                                    <div>
+                                        <div> <strong>Thời gian làm: {formatTime(parseInt(deThi[index].THOI_GIAN) * 60)}</strong> </div>
+                                    </div>
+                                    <button
+                                        class="btn btn-primary"
+                                        style={{
+                                            cursor: 'pointer'
+                                        }}
+                                        onClick={() => {
+                                            // eslint-disable-next-line no-restricted-globals
+                                            let cf = confirm("Đồng ý tham gia thi");
 
-            <div className="my-3 p-3 bg-body rounded shadow-sm">
-                <h6 className="border-bottom pb-2 mb-0"><strong>Danh sách đề thi rút gọn</strong></h6>
-                {deThi.map((item, index) => (
-                    <div className="d-flex text-muted pt-3"
-                        key={index}
-                    >
-                        <svg className="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff" /><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-                        <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
-                            <div className="d-flex justify-content-between">
-                                <div>
-                                    <strong className="text-gray-dark">{deThi[index].TEN_DE}</strong>
-                                    <span className="d-block">{deThi[index].TYPE === 1 ? "Đề đầy đủ" : "Đề rút gọn"}</span>
+                                            if (cf) {
+                                                navigator(`/test?test=${item.ID_DE_THI}`);
+                                            }
+
+                                        }}>Tham gia thi</button>
                                 </div>
-                                <div>
-                                    <div> <strong>Thời gian làm: {formatTime(parseInt(deThi[index].THOI_GIAN) * 60)}</strong> </div>
-                                </div>
-                                <button
-                                    class="btn btn-primary"
-                                    style={{
-                                        cursor: 'pointer'
-                                    }}
-                                    onClick={() => {
-                                        // eslint-disable-next-line no-restricted-globals
-                                        let cf = confirm("Đồng ý tham gia thi");
-
-                                        if (cf) {
-                                            navigator(`/test?test=${item.ID_DE_THI}`);
-                                        }
-
-                                    }}>Tham gia thi</button>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
 
 
-                <small className="d-block text-end mt-3">
-                    {/* <a href="#">All suggestions</a> */}
-                </small>
+                    <small className="d-block text-end mt-3">
+                        {/* <a href="#">All suggestions</a> */}
+                    </small>
+                </div>
             </div>
         </main>
     )
