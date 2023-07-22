@@ -5,6 +5,7 @@ import DeDaTao from "../pages/De_da_tao";
 import AdminLogin from "../pages/login";
 import AdminRegister from "../pages/Register";
 import UpdateDeThi from "../pages/Update_de_thi";
+import ThemCauHoi from "../pages/Cau_hoi";
 
 
 const adminPublicRoute = [
@@ -40,6 +41,12 @@ const adminPrivateRouter = [
     path: '/admin/list_de_thi',
     icon: "fa-solid fa-key",
     component: DeDaTao
+  },
+  {
+    name: 'Tạo câu hỏi',
+    path: '/admin/tao_cau_hoi',
+    icon: "fa-solid fa-key",
+    component: ThemCauHoi
   },
   {
     name: 'Đăng xuất',

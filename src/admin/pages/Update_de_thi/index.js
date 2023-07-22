@@ -132,8 +132,10 @@ function UpdateDeThi(props) {
     }, [])
 
     return (
-        <div>
-            <div>Tạo đề</div>
+        <div className='container'>
+            <h1>
+                {capNhat ? "Cập nhật đề" : "Tạo đề mới"}
+            </h1>
             <div className='NganHang_cau_hoi-header'>
 
                 <div className='dedatao-taomoi d-flex justify-content-center pt-4'>
@@ -204,8 +206,8 @@ function UpdateDeThi(props) {
             </div>
             <div className='pt-3 '>
                 <div className=" d-flex justify-content-center">
-                    <div className="col-11">
-                        <table className="table table-bordered" id='mytable'>
+                    <div className="col-11 shadow p-3 mb-5 bg-body rounded">
+                        <table className="table table-bordered table-hover " id='mytable'>
                             <thead>
                                 <tr>
                                     <th scope="col">Chọn</th>

@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import {MdDelete} from 'react-icons/md'
+import { GrUpdate } from 'react-icons/gr'
 
 function DeDaTao() {
 
@@ -60,13 +62,13 @@ function DeDaTao() {
         getDeThi();
     }, [])
     return (
-        <div>
-            <div className='dedatao-header'>các đề đã tạo</div>
+        <div className='container vh-100'>
+            <h1 className='dedatao-header '>các đề đã tạo</h1>
             <div className='dedatao-body' >
                 <div className='dedatao-table d-flex justify-content-center '>
 
-                    <div className='col-10  border border-dark'>
-                        <table className="table table-hover  ">
+                    <div className='col-10  shadow p-3 mb-5 bg-body rounded'>
+                        <table className="table table-hover table-bordered ">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -85,18 +87,23 @@ function DeDaTao() {
                                                 <th scope="row">{index + 1}</th>
                                                 <td>{items.TEN_DE}</td>
                                                 <td>{items.SO_NGUOI_THAM_GIA}</td>
-                                                <td>{items.NGAY_TAO}</td>
+                                                <td>{items.NGAY_TAO.slice(0, 19).replace('T', ' ')}</td>
                                                 <td>
-                                                    <span className='' >
+                                                    <span >
                                                         <Link
                                                             to='/admin/list_de_thi/update'
                                                             state={{ dethi: items }}
+                                                            className='text-decoration-none'
                                                         >
+                                                            <GrUpdate className='m-1'/>
                                                             Sửa
                                                         </Link>
 
                                                     </span>
-                                                    <span className='' onClick={() => handleDelete(items.ID_DE_THI)}>Xóa</span>
+                                                    <span className='m-3' onClick={() => handleDelete(items.ID_DE_THI)}>
+                                                        <MdDelete/>
+                                                        <label style={{cursor: 'pointer', color: 'blue'}}> Xóa</label>
+                                                    </span>
                                                 </td>
                                             </tr>
                                         </>

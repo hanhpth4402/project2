@@ -1,13 +1,14 @@
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import styles from './AdminRegister.module.scss';
 import classNames from 'classnames/bind';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 var cx = classNames.bind(styles);
 
 
-function AdminRegister () {
+function AdminRegister() {
 
     const [showPassword, setShowPassword] = useState(true);
     const [showPassword2, setShowPassword2] = useState(true);
@@ -22,6 +23,8 @@ function AdminRegister () {
     const [warningPassword, setWarningPassword] = useState(false);
     const [warningPassword2, setWarningPassword2] = useState(false);
 
+    const navigation = useNavigate();
+
     const handelOnChangeName = (event) => {
         if (event.target.value === "" && !warningName) {
             setWarningName(true);
@@ -30,7 +33,7 @@ function AdminRegister () {
         if (event.target.value !== "" && warningName) {
             setWarningName(false);
         }
-        
+
         setName(event.target.value);
     }
 
@@ -42,10 +45,10 @@ function AdminRegister () {
         if (event.target.value !== "" && warningEmail) {
             setWarningEmail(false);
         }
-        
+
         setEmail(event.target.value)
     }
-    
+
     const handelOnChangePassword = (event) => {
         if (event.target.value === "" && !warningPassword) {
             setWarningPassword(true);
@@ -54,7 +57,7 @@ function AdminRegister () {
         if (event.target.value !== "" && warningPassword) {
             setWarningPassword(false);
         }
-        
+
         setPassword(event.target.value)
     }
 
@@ -66,25 +69,45 @@ function AdminRegister () {
         if (event.target.value !== "" && warningPassword2) {
             setWarningPassword2(false);
         }
-        
+
+        if (event.target.value !== password) {
+            setShowPassword2(true)
+        }
+
         setPassword2(event.target.value)
     }
 
-    const handelSignUp = () => {
+    async function handelSignUp() {
         if (!warningEmail && email === "") setWarningEmail(true);
         if (!warningPassword2 && password2 === "") setWarningPassword2(true);
         if (!warningPassword && password === "") setWarningPassword(true);
         if (!warningName && name === "") setWarningName(true);
 
-        if (email !== "" && password === "" ) {
-            
+        if (!warningName && !warningEmail && !warningPassword && !warningPassword2) {
+            await axios.post('http://localhost:8082/admin/register',
+                {
+                    name: name,
+                    email: email,
+                    password: password
+                }
+            )
+                .then((response) => {
+                    
+                    if (response.data && response.data === "register success!") {
+                        toast.success("đăng ký tài khoản admin thành công")
+                        navigation('/admin/login')
+                    } else {
+                        console.log(response)
+                        toast.error("Đăng ký tài khoản admin không thành công")
+                    }
+                })
         }
 
-        
+
     }
 
     return (
-        <>
+        <div classNames="container">
             <div className={cx('register--login-block')}>
                 <div className={cx('register--login-container')}>
                     <div className={cx('register--login-title')}>
@@ -100,15 +123,15 @@ function AdminRegister () {
                                         <span className={cx('register--form__item-title')}>
                                             Họ và Tên
                                         </span>
-                                        <input 
-                                            type='name' 
-                                            placeholder='name' 
-                                            className={cx({['register--form__warning']: warningName}, 'register--form__item-input')}
+                                        <input
+                                            type='name'
+                                            placeholder='name'
+                                            className={cx({ ['register--form__warning']: warningName }, 'register--form__item-input')}
                                             value={name}
                                             onChange={(event) => handelOnChangeName(event)}
                                         />
                                     </div>
-                                    <div className={cx('register--form__item-warning', 'warning-pass')} style={{opacity: `${warningName ? 1: 0}`}}>
+                                    <div className={cx('register--form__item-warning', 'warning-pass')} style={{ opacity: `${warningName ? 1 : 0}` }}>
                                         *Không được bỏ trống
                                     </div>
                                 </div>
@@ -118,15 +141,15 @@ function AdminRegister () {
                                         <span className={cx('register--form__item-title')}>
                                             Địa Chỉ Email
                                         </span>
-                                        <input 
-                                            type='email' 
-                                            placeholder='email' 
-                                            className={cx({['register--form__warning']: warningEmail}, 'register--form__item-input')}
+                                        <input
+                                            type='email'
+                                            placeholder='email'
+                                            className={cx({ ['register--form__warning']: warningEmail }, 'register--form__item-input')}
                                             value={email}
                                             onChange={(event) => handelOnChangeEmail(event)}
                                         />
                                     </div>
-                                    <div className={cx('register--form__item-warning', 'warning-pass')} style={{opacity: `${warningEmail ? 1: 0}`}}>
+                                    <div className={cx('register--form__item-warning', 'warning-pass')} style={{ opacity: `${warningEmail ? 1 : 0}` }}>
                                         *Không được bỏ trống
                                     </div>
                                 </div>
@@ -137,23 +160,23 @@ function AdminRegister () {
                                             Mật Khẩu
                                         </span>
                                         <span className={cx('register--input_password')}>
-                                            <input 
-                                                type={`${showPassword ? 'password' : 'text'}`} 
-                                                placeholder='password' 
-                                                className={cx({['register--form__warning']: warningPassword}, 'register--form__item-input', 'register--form__item-password')}
+                                            <input
+                                                type={`${showPassword ? 'password' : 'text'}`}
+                                                placeholder='password'
+                                                className={cx({ ['register--form__warning']: warningPassword }, 'register--form__item-input', 'register--form__item-password')}
                                                 onChange={(event) => handelOnChangePassword(event)}
                                             />
                                             <span className={cx('register--form__item-inpur-eye')}>
-                                                <i 
-                                                    className={cx('register--form__item-input-password-eyesicon', {'fa-solid fa-eye-slash': !showPassword}, {'fa-solid fa-eye': showPassword})}
+                                                <i
+                                                    className={cx('register--form__item-input-password-eyesicon', { 'fa-solid fa-eye-slash': !showPassword }, { 'fa-solid fa-eye': showPassword })}
                                                     onClick={() => {
                                                         setShowPassword(!showPassword);
-                                                    }}    
+                                                    }}
                                                 ></i>
                                             </span>
                                         </span>
                                     </div>
-                                    <div className={cx('register--form__item-warning', 'warning-pass')} style={{opacity: `${warningPassword ? 1: 0}`}}>
+                                    <div className={cx('register--form__item-warning', 'warning-pass')} style={{ opacity: `${warningPassword ? 1 : 0}` }}>
                                         *Không được bỏ trống
                                     </div>
                                 </div>
@@ -164,23 +187,23 @@ function AdminRegister () {
                                             Nhập Lại Mật Khẩu
                                         </span>
                                         <span className={cx('register--input_password')}>
-                                            <input 
-                                                type={`${showPassword2 ? 'password' : 'text'}`} 
-                                                placeholder='password' 
-                                                className={cx({['register--form__warning']: warningPassword2}, 'register--form__item-input', 'register--form__item-password')}
+                                            <input
+                                                type={`${showPassword2 ? 'password' : 'text'}`}
+                                                placeholder='password'
+                                                className={cx({ ['register--form__warning']: warningPassword2 }, 'register--form__item-input', 'register--form__item-password')}
                                                 onChange={(event) => handelOnChangePassword2(event)}
                                             />
                                             <span className={cx('register--form__item-inpur-eye')}>
-                                                <i 
-                                                    className={'form__item-input-password-eyesicon ' + cx({'fa-solid fa-eye-slash': !showPassword2}, {'fa-solid fa-eye': showPassword2})}
+                                                <i
+                                                    className={'form__item-input-password-eyesicon ' + cx({ 'fa-solid fa-eye-slash': !showPassword2 }, { 'fa-solid fa-eye': showPassword2 })}
                                                     onClick={() => {
                                                         setShowPassword2(!showPassword2);
-                                                    }}    
+                                                    }}
                                                 ></i>
                                             </span>
                                         </span>
                                     </div>
-                                    <div className={cx('register--form__item-warning', 'warning-pass')} style={{opacity: `${warningPassword2 ? 1: 0}`}}>
+                                    <div className={cx('register--form__item-warning', 'warning-pass')} style={{ opacity: `${warningPassword2 ? 1 : 0}` }}>
                                         *Không được bỏ trống
                                     </div>
                                 </div>
@@ -188,9 +211,9 @@ function AdminRegister () {
                                 <div className={cx('register--form__item', 'register--form__btn')}>
                                     <div className={cx('register--form__item-btn', 'register--btn-login')}>
                                         <span className={cx('register--btn-icon', 'icon-login')}>
-                                            <i className={cx('register--register-icon') + " fa-solid fa-right-to-bracket"}/>
+                                            <i className={cx('register--register-icon') + " fa-solid fa-right-to-bracket"} />
                                         </span>
-                                        <span 
+                                        <span
                                             className={cx('register--form__btn-item', 'btn-title-login')}
                                             onClick={() => handelSignUp()}
                                         >
@@ -205,22 +228,36 @@ function AdminRegister () {
                                 Hoặc Đăng Nhập Bằng
                             </div>
                             <div className={cx('register--social_item', 'register--social-facebook')}>
-                                <i className={cx('register--social_item-icon') + ' fa-brands fa-facebook-f'}/>
+                                <i className={cx('register--social_item-icon') + ' fa-brands fa-facebook-f'} />
                                 <span className={cx("register--social_item-name")}>
-                                Facebook
+                                    Facebook
                                 </span>
                             </div>
                             <div className={cx('register--social_item', 'register--social_item', 'register--social-google')}>
-                                <i className={cx('register--social_item-icon') + ' fa-brands fa-google'}/>
+                                <i className={cx('register--social_item-icon') + ' fa-brands fa-google'} />
                                 <span className={cx("register--social_item-name")}>
-                                Google
+                                    Google
                                 </span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </>
+            <ToastContainer
+                position="top-left"
+                autoClose={500}
+                hideProgressBar={true}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+                backdrop="static"
+                keyboard={false}
+            />
+        </div>
     )
 }
 
